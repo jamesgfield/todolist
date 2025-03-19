@@ -10,9 +10,18 @@ function App() {
     'Pick up the kids from school'
   ]) 
 
+  // handleAddTodos updates todos using setTodos
+  function handleAddTodos(newTodo) {
+    // state syntax needed so webpage is listening for state changes
+    const newTodoList = [...todos, newTodo]
+    setTodos(newTodoList)
+  }
+
+
   return (
     <>
-      <TodoInput />
+      {/* passing handleAddTodos as an attribute prop to TodoInput */}
+      <TodoInput handleAddTodos={handleAddTodos} />
       <TodoList todos={todos} />
     </>
   )
