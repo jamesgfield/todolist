@@ -4,7 +4,10 @@ import TodoList from "./components/TodoList"
 
 function App() {
   // creating stateful variable to interact with
-  const [todos, setTodos] = useState([]) 
+  const [todos, setTodos] = useState([])
+
+  // need to declare input state in App file to give both list and input access to it
+  const [todoValue, setTodoValue] = useState('')
 
   // handleAddTodos updates todos using setTodos
   function handleAddTodos(newTodo) {
@@ -22,14 +25,16 @@ function App() {
   }
 
   function handleEditTodo(index) {
-
+      const valueToBeEdited = todos[index]
+      setTodoValue(valueToBeEdited)
+      handleDeleteTodo(index)
   }
 
   return (
     <>
       {/* passing handleAddTodos as an attribute prop to TodoInput */}
-      <TodoInput handleAddTodos={handleAddTodos} />
-      <TodoList handleDeleteTodo={handleDeleteTodo} todos={todos} />
+      <TodoInput todoValue={todoValue} setTodoValue={setTodoValue} handleAddTodos={handleAddTodos} />
+      <TodoList handleEditTodo={handleEditTodo} handleDeleteTodo={handleDeleteTodo} todos={todos} />
     </>
   )
 }
